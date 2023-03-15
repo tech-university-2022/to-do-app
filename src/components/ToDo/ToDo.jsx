@@ -1,11 +1,11 @@
 import "./ToDo.scss";
 
-function ToDo({ text, id, updateTodo }) {
+function ToDo({ text, id, updateTodo, deleteTodo }) {
   return (
     <div className="to-do-container">
       {text}
       <button onClick={() => updateTodo(id)}>Update</button>
-      <button>Delete</button>
+      <button onClick={() => deleteTodo(id)}>Delete</button>
     </div>
   );
 }

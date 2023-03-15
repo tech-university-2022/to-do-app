@@ -50,6 +50,11 @@ function App() {
       // setToDoList(newTodoList);
     }
   };
+  const deleteTodo = (id) => {
+    setPage("all to-dos");
+    const newToDoList = toDoList.filter((todo) => todo.id !== id);
+    setToDoList(newToDoList);
+  };
 
   const updateTodo = (id) => {
     setPage("create to do");
@@ -65,6 +70,7 @@ function App() {
           setPage={setPage}
           toDoList={toDoList}
           updateTodo={updateTodo}
+          deleteTodo={deleteTodo}
         />
       ) : (
         <CreateNew

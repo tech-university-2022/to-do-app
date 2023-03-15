@@ -1,7 +1,7 @@
 import ToDo from "../ToDo/ToDo";
 import "./ToDoList.scss";
 
-function ToDoList({ toDoList, updateTodo }) {
+function ToDoList({ toDoList, updateTodo, deleteTodo }) {
   let todoListItems = toDoList.map((eachToDo, index) => {
     return (
       <ToDo
@@ -9,6 +9,7 @@ function ToDoList({ toDoList, updateTodo }) {
         id={eachToDo.id}
         key={Date.now() + index}
         updateTodo={updateTodo}
+        deleteTodo={deleteTodo}
       />
     );
   });
