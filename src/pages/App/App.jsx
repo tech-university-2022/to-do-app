@@ -2,9 +2,11 @@ import "./App.scss";
 import AllToDos from "../AllToDos/AllToDos";
 import { useState } from "react";
 import CreateNew from "../CreateNew/CreateNew";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
   const [page, setPage] = useState("all to-dos");
+  console.log(page);
   const initialTodoList = [
     {
       id: 1,
@@ -63,22 +65,33 @@ function App() {
     setSelectedTodo(localSelectedTodo);
   };
 
-  return (
-    <div className="app-container">
-      {page === "all to-dos" ? (
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
         <AllToDos
           setPage={setPage}
           toDoList={toDoList}
           updateTodo={updateTodo}
           deleteTodo={deleteTodo}
         />
-      ) : (
+      ),
+    },
+    {
+      path: "create",
+      element: (
         <CreateNew
           setPage={setPage}
           createNewAndUpdateToDo={createNewAndUpdateToDo}
           selectedTodo={selectedTodo}
         />
-      )}
+      ),
+    },
+  ]);
+
+  return (
+    <div className="app-container">
+      <RouterProvider router={router} />
     </div>
   );
 }

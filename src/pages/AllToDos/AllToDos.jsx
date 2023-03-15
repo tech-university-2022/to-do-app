@@ -1,7 +1,7 @@
 import "./AllToDos.scss";
 import Profile from "../../components/Profile/Profile";
 import ToDoList from "../../components/ToDoList/ToDoList";
-
+import { Link } from "react-router-dom";
 function AllToDos({
   updateNewTodo,
   setPage,
@@ -20,7 +20,8 @@ function AllToDos({
           updateTodo={updateTodo}
           deleteTodo={deleteTodo}
         />
-        <button onClick={() => setPage("create new")}>Create new</button>
+        {/* <button onClick={() => setPage("create new")}>Create new</button> */}
+        <Link to="/create">Create New Todo</Link>
       </div>
     </div>
   );
