@@ -1,0 +1,13 @@
+.createnew-container {
+  display: flex;
+
+  .profile-column {
+    flex-grow: 1;
+  }
+
+  .create-new-todo {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+  }
+}

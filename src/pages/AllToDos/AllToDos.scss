@@ -1,0 +1,11 @@
+.alltodos-container {
+  display: flex;
+
+  .profile-column {
+    flex-grow: 1;
+  }
+
+  .all-to-dos-column {
+    flex-grow: 3;
+  }
+}
