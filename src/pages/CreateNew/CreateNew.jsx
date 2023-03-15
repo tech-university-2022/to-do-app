@@ -3,9 +3,14 @@ import Profile from "../../components/Profile/Profile";
 import { useState } from "react";
 
 function CreateNew(props) {
-  const { createNewToDo } = props;
+  const { createNewAndUpdateToDo } = props;
   const { setPage } = props;
-  const [newTodo, setNewTodo] = useState("");
+  const { selectedTodo } = props;
+  console.log(">>>>", selectedTodo);
+  // new
+  const [newTodo, setNewTodo] = useState(
+    selectedTodo === null ? "" : selectedTodo.text
+  );
 
   let onTextChange = (event) => {
     let changedValue = event.target.value;
@@ -14,7 +19,15 @@ function CreateNew(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createNewToDo(newTodo);
+
+    if (selectedTodo === null) {
+      // new todo
+      createNewAndUpdateToDo(newTodo, null);
+    } else {
+      // update todo
+      createNewAndUpdateToDo(newTodo, selectedTodo.id);
+    }
+
     setPage("all to-dos");
   };
 
@@ -29,6 +42,7 @@ function CreateNew(props) {
             type="textarea"
             placeholder="Create/Update todo.."
             onChange={onTextChange}
+            value={newTodo}
           />
           <button className="button-group">Save & Submit</button>
         </form>

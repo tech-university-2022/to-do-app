@@ -20,26 +20,42 @@ function App() {
     },
   ];
   const [toDoList, setToDoList] = useState(initialTodoList);
-  const createNewToDo = (text) => {
-    const newToDo = {
-      text: text,
-      id: Date.now(),
-    };
-    let newToDoList = [...toDoList, newToDo];
-    setToDoList(newToDoList);
+  const [selectedTodo, setSelectedTodo] = useState(null);
+
+  const createNewAndUpdateToDo = (text, id) => {
+    if (id === null) {
+      const newToDo = {
+        text: text,
+        id: Date.now(),
+      };
+      let newToDoList = [...toDoList, newToDo];
+      setToDoList(newToDoList);
+    } else {
+      const localSelectedTodoIndex = toDoList.findIndex(
+        (todo) => todo.id === id
+      );
+      toDoList[localSelectedTodoIndex].text = text;
+      setToDoList(toDoList);
+
+      // const newTodoList = toDoList.map((eachTodo, index) => {
+      //   if (id === eachTodo.id) {
+      //     // return eachTodo.text = text
+      //     return {
+      //       text: text,
+      //       id: id,
+      //     };
+      //   }
+      //   return eachTodo;
+      // });
+      // setToDoList(newTodoList);
+    }
   };
 
-  const updateToDo = (id, text) => {
+  const updateTodo = (id) => {
     setPage("create to do");
-
-    let newTodoList = toDoList.map((todo) => {
-      if (todo.id === id) {
-        todo.text = text;
-      }
-
-      return todo;
-    });
-    setToDoList(newTodoList);
+    const localSelectedTodo = toDoList.find((todo) => todo.id === id);
+    console.log("selectedtodo", localSelectedTodo);
+    setSelectedTodo(localSelectedTodo);
   };
 
   return (
@@ -47,11 +63,15 @@ function App() {
       {page === "all to-dos" ? (
         <AllToDos
           setPage={setPage}
-          updateToDo={updateToDo}
           toDoList={toDoList}
+          updateTodo={updateTodo}
         />
       ) : (
-        <CreateNew setPage={setPage} createNewToDo={createNewToDo} />
+        <CreateNew
+          setPage={setPage}
+          createNewAndUpdateToDo={createNewAndUpdateToDo}
+          selectedTodo={selectedTodo}
+        />
       )}
     </div>
   );
